@@ -2,7 +2,7 @@ import axios from 'axios'
 import QS from 'qs'
 import { Message, Loading } from 'element-ui'
 
-axios.defaults.baseURL = 'https://music-api-wine-omega.vercel.app'
+axios.defaults.baseURL = '/api'
 
 axios.defaults.timeout = 5000
 axios.defaults.withCredentials = true
@@ -16,8 +16,6 @@ axios.interceptors.request.use(config => {
     loadingInstance = Loading.service({
         lock: true,
         text: '加载中...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
     })
     // 携带token
     let token = localStorage.getItem('token')
@@ -48,7 +46,6 @@ axios.interceptors.response.use(response => {
                 Message.error('网络请求不存在')
                 break
         }
-
     } else {
         if (!window.navigator.onLine) {
             // 断网处理：跳转到断网页面/弹出蒙层
@@ -74,7 +71,7 @@ export function get(url, params) {
 }
 export function post(url, params) {
     return new Promise((resolve, reject) => {
-        axios.post(url, QS.stringify(params))
+        axios.post(url, params)
             .then(res => {
                 resolve(res.data);
             })

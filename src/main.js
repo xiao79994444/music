@@ -4,7 +4,8 @@ import router from './router'
 import store from './store'
 
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css';
+import './assets/style/style/theme/index.css'
 import './assets/fonts/fonts.css'
 import 'lib-flexible/flexible'
 Vue.use(ElementUI);
@@ -43,6 +44,7 @@ Vue.filter('formatTime', (time) => {
 })
 
 Vue.config.productionTip = false
+
 
 new Vue({
     router,

@@ -78,19 +78,25 @@ export default {
         });
 
         // 获取推荐歌单数据
-        api.playlist.personalized({ limit: 10 }).then((res) => {
-            res.result.forEach((e) => {
-                e.picUrl = e.picUrl + "?param=300y300";
+        api.playlist
+            .personalized({ limit: 10 })
+            .then((res) => {
+                res.result.forEach((e) => {
+                    e.picUrl = e.picUrl + "?param=300y300";
+                });
+                this.playlist = res.result;
+            })
+            .catch((err) => {
+                console.log(err);
             });
-            this.playlist = res.result;
-        });
 
         // 获取推荐最新音乐
-        api.song.newsong({ limit: 20 }).then((res) => {
-            res.result.forEach((e) => {
-                e.picUrl = e.picUrl + "?param=100y100";
+        api.song.newsong({ limit: 5 }).then((res) => {
+            let result = res.result;
+            result.forEach((e) => {
+                e.picUrl = e.picUrl.replace("http", "https") + "?param=100y100";
             });
-            this.newsongs1 = res.result;
+            this.newsongs1 = result;
         });
 
         // 获取推荐mv

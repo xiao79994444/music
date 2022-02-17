@@ -2,14 +2,27 @@
 
 module.exports = {
     devServer: {
-        port: 8000,
+        // port: 8000,
         disableHostCheck: true,
         open: true,
         overlay: {
             warnings: true,
             errors: true,
         },
+        proxy: {
+            '/api': {
+                target: 'https://music-api-wine-omega.vercel.app',
+                changOrigin: true,
+                ws: true,
+                pathRewrite: {
+                    "/api": ''
+                }
+
+            }
+        }
+
     },
+
     // 关闭eslint校验
     lintOnSave: false,
     // rem
